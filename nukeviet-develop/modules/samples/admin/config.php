@@ -33,7 +33,7 @@ if (!empty($data['txtname']))
 
 
 //print_r($data);
-//ddie();
+//die();
 
 
 
