@@ -8,20 +8,17 @@
  * @Createdate Tue, 14 Jan 2014 08:23:14 GMT
  */
 
-if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
+require ( NV_ROOTDIR . "/includes/class/request.class.php" );
+
+ if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 $data = array();
 
-$data['txtname'] = $nv_Request->get_title( 'txtname', 'post', '' );
+$data['txtname'] = $nv_Request->get_title( 'txtname', 'post', '' ); 
 $data['txtage'] = $nv_Request->get_title( 'txtage', 'post', '' );
-$data['sex'] = $nv_Request->get_editor( 'sex', '', NV_ALLOWED_HTML_TAGS, 1); 
-$data['txtclassname'] = $nv_Request->get_title( 'txtclassname', 'post', '' );;
+$data['sex'] = $nv_Request->get_editor( 'sex', '', NV_ALLOWED_HTML_TAGS, 1);
+$data['txtclassname'] = $nv_Request->get_title( 'txtclassname', 'post', '' );
 $data['selecthobbies'] = '';
 $data['txtareadescription'] = '';
-
-echo $data['txtname'];
-
-
-
 
 
 
@@ -35,11 +32,11 @@ $xtpl->assign( 'OP', $op );
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
-
 $page_title = $lang_module['main'];
 
-include NV_ROOTDIR . '/includes/header.php';
+include NV_ROOTDIR . '/includes/header.php'; 
 echo nv_admin_theme( $contents );
 include NV_ROOTDIR . '/includes/footer.php';
+die('hello');
 
 ?>
