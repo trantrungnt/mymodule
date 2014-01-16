@@ -31,7 +31,6 @@ if (!empty($data['txtname']))
 	$row->execute();
 }
 
-
 //print_r($data);
 //die();
 
