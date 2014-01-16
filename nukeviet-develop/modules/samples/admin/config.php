@@ -26,8 +26,8 @@ if (!empty($data['txtname']))
 	$row->bindParam(':txtage', $data['txtage'], PDO::PARAM_STR, 10);
 	$row->bindParam(':sex', $data['sex'], PDO::PARAM_INT);
 	$row->bindParam(':txtclassname', $data['txtclassname'], PDO::PARAM_STR, 255);
-	$row->bindParam(':selecthobbies', $data['selecthobbies'], PDO::PARAM_STR, 255);
-	$row->bindParam(':txtareadescription',$data['txtareadescription'], PDO::PARAM_STR);
+	$row->bindParam(':selecthobbies', $data['selecthobbies'], PDO::PARAM_INT);
+	$row->bindParam(':txtareadescription', $data['txtareadescription'], PDO::PARAM_STR);
 	$row->execute();
 }
 
