@@ -22,10 +22,19 @@ function nv_theme_samples_main ( $array_data )
 
     $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $module_info['template'] . '/modules/' . $module_file );
     $xtpl->assign( 'LANG', $lang_module );
-
-    
-
-    $xtpl->parse( 'main' );
+	
+	//load data to Display 
+	if (! empty($array_data))
+	{
+		foreach ($array_data as $data) {
+			$xtpl->assign('DATA', $data);
+				
+			$xtpl->parse('main.loop');
+			
+		}
+	}
+		
+    $xtpl->parse( 'main' );	
     return $xtpl->text( 'main' );
 }
 
