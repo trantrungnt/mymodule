@@ -10,7 +10,9 @@
 
 if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
+
 $data = array();
+
 
 $data['txtname'] = $nv_Request->get_title( 'txtname', 'post', '' ); 
 $data['txtage'] = $nv_Request->get_title( 'txtage', 'post', '' );
@@ -18,6 +20,7 @@ $data['sex'] = $nv_Request->get_editor( 'sex', '', NV_ALLOWED_HTML_TAGS, 0);
 $data['txtclassname'] = $nv_Request->get_title( 'txtclassname', 'post', '' );
 $data['selecthobbies'] = $nv_Request->get_int( 'selecthobbies', 'post' );
 $data['txtareadescription'] = $nv_Request->get_textarea( 'txtareadescription', '', NV_ALLOWED_HTML_TAGS );
+
 
 if (!empty($data['txtname']))
 {
@@ -49,7 +52,12 @@ $xtpl->assign( 'OP', $op );
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
 
+
+
+
 $page_title = $lang_module['config'];
+
+
 
 
 

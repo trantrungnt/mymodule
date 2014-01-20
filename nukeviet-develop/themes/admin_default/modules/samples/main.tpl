@@ -1,7 +1,28 @@
 <!-- BEGIN: main -->
-	<form action="{NV_BASE_ADMINURL}index.php?{NV_NAME_VARIABLE}={MODULE_NAME}&{NV_OP_VARIABLE}={OP}" method="post">
-	 		<div style="text-align: left"><input name="submit" type="submit" value="{LANG.save}" /></div>
-	</form>
+	 		<table class="tab1">
+	 			<tr>
+	 				<td>id</td>
+	 				<td>name</td>
+	 				<td>age</td>
+	 				<td>sex</td>
+	 				<td>classname</td>
+	 				<td>hobbies</td>
+	 				<td>description</td>
+	 							
+	 			</tr>
+
+				 <!-- BEGIN: loop -->			
+	 			<tr>
+	 				<td>{DATA.id}</td>
+	 				<td>{DATA.name}</td>
+	 				<td>{DATA.age}</td>
+	 				<td>{DATA.sex}</td>
+	 				<td>{DATA.classname}</td>
+	 				<td>{DATA.hobbies}</td>
+	 				<td>{DATA.description}</td>				
+	 			</tr>
+	 			<!-- END: loop -->
+	 		</table>	
 <!-- END: main -->
 
 
