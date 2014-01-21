@@ -1,5 +1,6 @@
 <!-- BEGIN: main -->
-	 		<table class="tab1"> 			
+	 		<table class="tab1"> 	
+	 			<!--Note: this is a template for funcs: Display on site -->		
 	 			<tr>
 	 				<td>ID</td>
 	 				<td>name</td>
