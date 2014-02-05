@@ -12,7 +12,7 @@ if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
 $data = array();
 
-$data['CMND'] = $nv_Request->get_title('CMND','post', '');
+$data['CMND_Code'] = $nv_Request->get_title('CMND','post', '');
 $data['name'] = $nv_Request->get_title('name','post', '');
 $data['birthday'] = $nv_Request->get_title('birthday','post', '');
 $data['sex'] = $nv_Request->get_int('sex', 'post');
@@ -26,19 +26,23 @@ $data['where_licensing'] = $nv_Request->get_title('where_licensing','post', '');
 $data['characteristics'] = $nv_Request->get_title('characteristics','post', '');
 
 
-if (!empty($data['CMND']) OR !empty($data['name']) 
+
+
+if (!empty($data['CMND_Code']) OR !empty($data['name']) 
 	OR !empty($data['birthday']) OR !empty($data['sex']) 
 	OR !empty($data['hometown']) OR !empty($data['origin']) 
 	OR !empty($data['place']) OR !empty($data['ethnic'])
-	OR !empty($data['religious']) OR !empty($data['date-of-issue'])
-	OR !empty($data['where-licensing']) OR !empty($data['characteristics']))
+	OR !empty($data['religious']) OR !empty($data['date_of_issue'])
+	OR !empty($data['where_licensing']) OR !empty($data['characteristics']))
 {	
 	try{
-		$sql = 'INSERT INTO nv4_vi_cmnd (CMND, name, birthday, sex, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:CMND, :name, :birthday, :sex, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)';
+		$sql = 'INSERT INTO nv4_vi_cmnd (CMND_Code, name, birthday, sex, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:CMND_Code, :name, :birthday, :sex, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)';
 		
 		$row = $db->prepare($sql);
+		//var_dump($data);
+		//die();
 		
-	    $row->bindParam(':CMND', $data['CMND'], PDO::PARAM_STR, 255);
+	    $row->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
 		$row->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
 		$row->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
 		$row->bindParam(':sex', $data['sex'], PDO::PARAM_INT);

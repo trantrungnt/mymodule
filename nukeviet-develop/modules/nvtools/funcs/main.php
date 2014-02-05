@@ -223,6 +223,8 @@ if ( $savedata )
 
                     $content .= "\$xtpl = new XTemplate( \$op . '.tpl', NV_ROOTDIR . '/themes/' . \$global_config['module_theme'] . '/modules/' . \$module_file );\n";
                     $content .= "\$xtpl->assign( 'LANG', \$lang_module );\n";
+                    $content .= "\$xtpl->assign( 'NV_LANG_VARIABLE', NV_LANG_VARIABLE );\n";
+                    $content .= "\$xtpl->assign( 'NV_LANG_DATA', NV_LANG_DATA );\n";
                     $content .= "\$xtpl->assign( 'NV_BASE_ADMINURL', NV_BASE_ADMINURL );\n";
                     $content .= "\$xtpl->assign( 'NV_NAME_VARIABLE', NV_NAME_VARIABLE );\n";
                     $content .= "\$xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );\n";
@@ -250,7 +252,7 @@ if ( $savedata )
 
                     //	tpl
                     $content = "<!-- BEGIN: main -->\n";
-                    $content .= "	<form action=\"{NV_BASE_ADMINURL}index.php?{NV_NAME_VARIABLE}={MODULE_NAME}&{NV_OP_VARIABLE}={OP}\" method=\"post\">\n";
+                    $content .= "	<form action=\"{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}\" method=\"post\">\n";
                     $content .= "		<div style=\"text-align: center\"><input name=\"submit\" type=\"submit\" value=\"{LANG.save}\" /></div>\n";
                     $content .= "	</form>\n";
                     $content .= "<!-- END: main -->\n";
