@@ -7,7 +7,7 @@
 			
 			<tr>
 				<td> Mã Chứng minh thư nhân dân</td>
-				<td> <input type="text" name="code" value="{DATA.cmnd_code}"/> </td>				
+				<td> <input name="cmnd" type="text" value="{DATA.cmnd_code}"/> </td>				
 			</tr> 
 			
 			<tr>

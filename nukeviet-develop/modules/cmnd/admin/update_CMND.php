@@ -53,30 +53,15 @@ $xtpl->assign('DATA', $rows);
 //$data = array();
 
 //why i can not get data from update.tpl via textbox?
-$data1 = $nv_Request->get_title('CMND_Code','post','');
-var_dump($data1);
-die();
+//$data1 = $nv_Request->get_title('cmnd','post','');
+//$data['birthday'] = $nv_Request->get_title('birthday','post', '');
+//var_dump($data1);
+//die();
 
 
+$data = array();
 
-/*$data['name'] = $nv_Request->get_title('name','post', '');
-$data['birthday'] = $nv_Request->get_title('birthday','post', '');
-$data['sex'] = $nv_Request->get_int('sex', 'post');
-$data['hometown'] = $nv_Request->get_title('hometown','post', '');
-$data['origin'] = $nv_Request->get_title('origin','post', '');
-$data['place'] = $nv_Request->get_title('place','post', '');
-$data['ethnic'] = $nv_Request->get_title('ethnic','post', '');
-$data['religious'] = $nv_Request->get_title('religious','post', '');
-$data['date_of_issue'] = $nv_Request->get_title('date_of_issue','post', '');
-$data['where_licensing'] = $nv_Request->get_title('where_licensing','post', '');
-$data['characteristics'] = $nv_Request->get_title('characteristics','post', '');*/
-
-
-//execute to update CMND
-try{
-	//$data = array();
-
-/*$data['CMND_Code'] = $nv_Request->get_title('CMND','post', '');
+$data['CMND_Code'] = $nv_Request->get_title('cmnd','post', '');
 $data['name'] = $nv_Request->get_title('name','post', '');
 $data['birthday'] = $nv_Request->get_title('birthday','post', '');
 $data['sex'] = $nv_Request->get_int('sex', 'post');
@@ -87,35 +72,46 @@ $data['ethnic'] = $nv_Request->get_title('ethnic','post', '');
 $data['religious'] = $nv_Request->get_title('religious','post', '');
 $data['date_of_issue'] = $nv_Request->get_title('date_of_issue','post', '');
 $data['where_licensing'] = $nv_Request->get_title('where_licensing','post', '');
-$data['characteristics'] = $nv_Request->get_title('characteristics','post', '');*/
+$data['characteristics'] = $nv_Request->get_title('characteristics','post', '');
+
+/*if (!empty($data['CMND_Code']) OR  !empty($data['name']) 
+		OR !empty($data['birthday']) OR !empty($data['sex']) 
+		OR !empty($data['hometown']) OR !empty($data['origin']) 
+		OR !empty($data['place']) OR !empty($data['ethnic'])
+		OR !empty($data['religious']) OR !empty($data['date_of_issue'])
+		OR !empty($data['where_licensing']) OR !empty($data['characteristics']))*/
+ 
+// if (!empty($data['CMND_Code']))
+	//{
+//execute to update CMND
+try{
+	$sql = "UPDATE nv4_vi_cmnd SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
 	
-	//$sql = "UPDATE nv4_vi_cmnd SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
-	
-	
-	//$query = $db->prepare($sql);
+	$query = $db->prepare($sql);
 	//$row = $query->fetch();
 	
-	/*$row->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
-	$row->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
-	$row->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-	$row->bindParam(':sex', $data['sex'], PDO::PARAM_INT);
-	$row->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
-	$row->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
-	$row->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
-	$row->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
-	$row->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
-	$row->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
-	$row->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
-	$row->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255); */ 
+	$query->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
+	$query->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
+	$query->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
+	$query->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
+	$query->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
+	$query->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
+	$query->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
+	$query->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
+	$query->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
+	$query->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
+	$query->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
+	$query->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);  
 					
-	//$row->execute();
-	
+	$query->execute();
 }
 catch(PDOException $e)
 {
-	var_dump($data);
+	print_r($e);
 	die();
 }
+//}
+
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
