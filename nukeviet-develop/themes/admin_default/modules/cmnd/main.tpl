@@ -10,12 +10,12 @@
 			
 			<tr>
 				<td> Họ và tên</td>
-				<td> <input type="text" name="name" /></td>
+				<td> <input type="text" name="name"/></td>
 			</tr>
 			
 			<tr>
 				<td> Ngày sinh</td>
-				<td> <input type="text" name="birthday" /></td>
+				<td> <input type="text" name="birthday"/></td>
 			</tr>
 			
 			<tr>
@@ -29,42 +29,42 @@
 			
 			<tr>
 				<td> Quê quán </td>
-				<td> <input type="text" name="hometown"/></td>
+				<td> <input type="text" name="hometown" /></td>
 			</tr>
 			
 			<tr>
 				<td> Nguyên quán</td>
-				<td> <input type="text" name="origin" /></td>
+				<td> <input type="text" name="origin"/></td>
 			</tr>
 			
 			<tr>
 				<td> Nơi đăng ký hộ khẩu thường trú</td>
-				<td> <input type="text" name="place"/></td>
+				<td> <input type="text" name="place" /></td>
 			</tr>
 			
 			<tr>
 				<td> Dân tộc</td>
-				<td> <input type="text" name="ethnic"/></td>
+				<td> <input type="text" name="ethnic" /></td>
 			</tr>
 			
 			<tr>
 				<td> Tôn giáo</td>
-				<td> <input type="text" name="religious"/> </td>
+				<td> <input type="text" name="religious" /> </td>
 			</tr>
 			
 			<tr>
 				<td> Ngày cấp</td>
-				<td><input type="text" name="date_of_issue"/></td>
+				<td><input type="text" name="date_of_issue" /></td>
 			</tr>
 			
 			<tr>
 				<td> Nơi cấp</td>
-				<td> <input type="text" name="where_licensing"/></td>
+				<td> <input type="text" name="where_licensing" /></td>
 			</tr>
 			
 			<tr>
 				<td> Đặc điểm</td>
-				<td> <input type="text" name="characteristics"/></td>
+				<td> <input type="text" name="characteristics" /></td>
 			</tr>
 		</table>
 	</form>

@@ -14,7 +14,7 @@ $submenu['main'] = $lang_module['main'];
 $submenu['config'] = $lang_module['config'];
 $submenu['CMND'] = $lang_module['CMND'];
 
-$allow_func = array( 'main', 'config', 'CMND', 'delete_CMND');
+$allow_func = array( 'main', 'config', 'CMND', 'delete_CMND', 'update_CMND');
 
 define( 'NV_IS_FILE_ADMIN', true );
 

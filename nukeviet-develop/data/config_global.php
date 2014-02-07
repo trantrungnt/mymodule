@@ -5,7 +5,7 @@
  * @Author VINADES.,JSC (contact@vinades.vn)
  * @Copyright (C) 2014 VINADES.,JSC. All rights reserved
  * @License GNU/GPL version 2 or any later version
- * @Createdate Wed, 05 Feb 2014 16:28:27 GMT
+ * @Createdate Fri, 07 Feb 2014 04:55:23 GMT
  */
 
 if ( ! defined( 'NV_MAINFILE' ) ) die( 'Stop!!!' );
@@ -104,7 +104,7 @@ $global_config['site_phone']='';
 $global_config['site_timezone']='byCountry';
 $global_config['spadmin_add_admin']=1;
 $global_config['str_referer_blocker']=0;
-$global_config['timestamp']=24;
+$global_config['timestamp']=25;
 $global_config['upload_checking_mode']='mild';
 $global_config['useactivate']=2;
 $global_config['version']='4.0.00';

@@ -1,11 +1,13 @@
 <?php
+
+//Authentication of delete_CMND.php in ADMIN folder
 if( ! defined( 'NV_IS_FILE_ADMIN' ) )
 	die( 'Stop!!!' );
 
 
 //if (!empty($delcmnd_code))
 //{
-	//get cmnd_code and delete this row 
+	//get cmnd_code from delete_CMND.tpl and delete this row 
 	$cmnd_code = $nv_Request->get_title('CMND_Code','get');
 	$sql_delcmnd = "delete from nv4_vi_cmnd where CMND_Code = '".$cmnd_code."'";
 	//var_dump($sql_delcmnd);
