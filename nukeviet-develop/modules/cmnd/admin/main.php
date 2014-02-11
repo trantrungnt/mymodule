@@ -40,7 +40,7 @@ $data['characteristics'] = $nv_Request->get_title('characteristics','post', '');
 		OR !empty($data['where_licensing']) OR !empty($data['characteristics']))
 	{	
 		try{
-			$sql = 'INSERT INTO nv4_vi_cmnd (CMND_Code, name, birthday, sex, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:CMND_Code, :name, :birthday, :sex, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)';
+			$sql = "INSERT INTO ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." (CMND_Code, name, birthday, sex, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:CMND_Code, :name, :birthday, :sex, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)";
 			
 			$row = $db->prepare($sql);
 			//var_dump($data);

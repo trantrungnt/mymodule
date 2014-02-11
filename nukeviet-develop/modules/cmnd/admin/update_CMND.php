@@ -85,7 +85,7 @@ OR !empty($data['where_licensing']) OR !empty($data['characteristics'])) */
 //{
 //execute to update CMND
 try{
-$sql = "UPDATE nv4_vi_cmnd SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
+$sql = "UPDATE ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
 
 $query = $db->prepare($sql);
 //$row = $query->fetch();
