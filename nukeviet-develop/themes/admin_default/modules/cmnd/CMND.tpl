@@ -31,8 +31,8 @@
 				<td>{DATA.date_of_issue}</td>				
 				<td>{DATA.where_licensing}</td>			
 				<td>{DATA.characteristics}</td>		
-				<td> <a href="index.php?language=vi&nv=cmnd&op=delete_CMND&CMND_Code={DATA.cmnd_code}">Delete</a></td>	
-				<td> <a href="index.php?language=vi&nv=cmnd&op=update_CMND&CMND_Code={DATA.cmnd_code}">Update</a></td>					
+				<td> <a href="index.php?language=vi&nv=cmnd&op=delete_CMND&CMND_Code={DATA.cmnd_code}">Xóa</a></td>	
+				<td> <a href="index.php?language=vi&nv=cmnd&op=update_CMND&CMND_Code={DATA.cmnd_code}">Sửa</a></td>					
 			</tr>
 			<!-- END: loop -->		
 		</table>		

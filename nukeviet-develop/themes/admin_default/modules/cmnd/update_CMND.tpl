@@ -25,15 +25,15 @@
 				<td> Giới tính</td>
 				
 				<td> 	 
-					<input type="radio" name="sex" value="{DATA.sex}"
+					<input type="radio" name="sex" value="1"
 					<!-- BEGIN: check_male -->
-					checked="true"
+					checked="checked"
 					 <!-- END: check_male -->	
 					>Nam
 					<br/>					
-					<input type="radio" name="sex" value="{DATA.sex}"
+					<input type="radio" name="sex" value="0"
 					<!-- BEGIN: check_female -->
-					checked="false"
+					checked="checked"
 					 <!-- END: check_female -->
 					>Nữ		
 	 		 	</td>

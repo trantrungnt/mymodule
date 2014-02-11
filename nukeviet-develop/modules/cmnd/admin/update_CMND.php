@@ -1,7 +1,7 @@
 <?php
 //authentication of file update_CMND.php in ADMIN folder
 if( ! defined( 'NV_IS_FILE_ADMIN' ) )
-	die( 'Stop!!!' );
+die( 'Stop!!!' );
 
 
 $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file );
@@ -15,7 +15,7 @@ $xtpl->assign( 'MODULE_NAME', $module_name );
 $xtpl->assign( 'OP', $op );
 
 
-//get CMND_Code from CMND.tpl 
+//get CMND_Code from CMND.tpl
 $cmnd_code = $nv_Request->get_title('CMND_Code','get');
 
 //query by CMND_Code and Display in update_CMND.tpl
@@ -24,26 +24,26 @@ $_sql = "SELECT CMND_Code, name, birthday, sex, hometown, origin, place, ethnic,
 $_query = $db->query($_sql);
 $rows = $_query->fetch();
 
-	/*if($rows['sex'] == 1)
-	{
-		$xtpl->parse('main.check_male');				
-	}else
-		{
-			$xtpl->parse('main.check_female');
-		}*/
-	
-	//check sex
-switch ($rows['sex']) 
+/*if($rows['sex'] == 1)
 {
-	case '0':
-		$xtpl->parse('main.check_female');
-		break;
-		
-	default:
-		$xtpl->parse('main.check_male');
-		break;
+$xtpl->parse('main.check_male');
+}else
+{
+$xtpl->parse('main.check_female');
+}*/
+
+//check sex
+switch ($rows['sex'])
+{
+case '0':
+$xtpl->parse('main.check_female');
+break;
+
+default:
+$xtpl->parse('main.check_male');
+break;
 }	
-		
+
 //fill data to update_CMND.tpl
 $xtpl->assign('DATA', $rows);	
 
@@ -74,41 +74,41 @@ $data['date_of_issue'] = $nv_Request->get_title('date_of_issue','post', '');
 $data['where_licensing'] = $nv_Request->get_title('where_licensing','post', '');
 $data['characteristics'] = $nv_Request->get_title('characteristics','post', '');
 
-/*if (!empty($data['CMND_Code']) OR  !empty($data['name']) 
-		OR !empty($data['birthday']) OR !empty($data['sex']) 
-		OR !empty($data['hometown']) OR !empty($data['origin']) 
-		OR !empty($data['place']) OR !empty($data['ethnic'])
-		OR !empty($data['religious']) OR !empty($data['date_of_issue'])
-		OR !empty($data['where_licensing']) OR !empty($data['characteristics']))*/
+/*if (!empty($data['CMND_Code']) OR !empty($data['name'])
+OR !empty($data['birthday']) OR !empty($data['sex'])
+OR !empty($data['hometown']) OR !empty($data['origin'])
+OR !empty($data['place']) OR !empty($data['ethnic'])
+OR !empty($data['religious']) OR !empty($data['date_of_issue'])
+OR !empty($data['where_licensing']) OR !empty($data['characteristics'])) */
  
 // if (!empty($data['CMND_Code']))
-	//{
+//{
 //execute to update CMND
 try{
-	$sql = "UPDATE nv4_vi_cmnd SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
-	
-	$query = $db->prepare($sql);
-	//$row = $query->fetch();
-	
-	$query->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
-	$query->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
-	$query->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
-	$query->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
-	$query->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
-	$query->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
-	$query->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
-	$query->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
-	$query->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
-	$query->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
-	$query->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
-	$query->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);  
-					
-	$query->execute();
+$sql = "UPDATE nv4_vi_cmnd SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
+
+$query = $db->prepare($sql);
+//$row = $query->fetch();
+
+$query->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
+$query->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
+$query->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
+$query->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
+$query->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
+$query->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
+$query->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
+$query->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
+$query->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
+$query->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
+$query->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
+$query->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);
+
+$query->execute();
 }
 catch(PDOException $e)
 {
-	print_r($e);
-	die();
+print_r($e);
+die();
 }
 //}
 
@@ -123,3 +123,5 @@ echo nv_admin_theme( $contents );
 include NV_ROOTDIR . '/includes/footer.php';
 
 ?>
+
+  
