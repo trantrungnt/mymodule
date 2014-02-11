@@ -35,17 +35,18 @@ $xtpl->parse('main.check_female');
 //check sex
 switch ($rows['sex'])
 {
-case '0':
-$xtpl->parse('main.check_female');
-break;
-
-default:
-$xtpl->parse('main.check_male');
-break;
+	case '0':
+	$xtpl->parse('main.check_female');
+	break;
+	
+	default:
+	$xtpl->parse('main.check_male');
+	break;
 }	
 
-//fill data to update_CMND.tpl
-$xtpl->assign('DATA', $rows);	
+if ($rows['birthday']!='0000-00-00' AND $rows['date_of_issue']!='0000-00-00') 
+																				//fill data to update_CMND.tpl
+																				$xtpl->assign('DATA', $rows);	
 
 
 //start to update CMND
@@ -74,44 +75,48 @@ $data['date_of_issue'] = $nv_Request->get_title('date_of_issue','post', '');
 $data['where_licensing'] = $nv_Request->get_title('where_licensing','post', '');
 $data['characteristics'] = $nv_Request->get_title('characteristics','post', '');
 
-/*if (!empty($data['CMND_Code']) OR !empty($data['name'])
-OR !empty($data['birthday']) OR !empty($data['sex'])
-OR !empty($data['hometown']) OR !empty($data['origin'])
-OR !empty($data['place']) OR !empty($data['ethnic'])
-OR !empty($data['religious']) OR !empty($data['date_of_issue'])
-OR !empty($data['where_licensing']) OR !empty($data['characteristics'])) */
- 
-// if (!empty($data['CMND_Code']))
-//{
+/*if (!empty($data['CMND_Code']) AND !empty($data['name'])
+AND !empty($data['birthday']) AND !empty($data['sex'])
+AND !empty($data['hometown']) AND !empty($data['origin'])
+AND !empty($data['place']) AND !empty($data['ethnic'])
+AND !empty($data['religious']) AND !empty($data['date_of_issue'])
+AND !empty($data['where_licensing']) AND !empty($data['characteristics']))*/
+
+if (isset($data['CMND_Code']) != "") 
 //execute to update CMND
 try{
-$sql = "UPDATE ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
-
-$query = $db->prepare($sql);
-//$row = $query->fetch();
-
-$query->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
-$query->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
-$query->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
-$query->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
-$query->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
-$query->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
-$query->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
-$query->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
-$query->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
-$query->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
-$query->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
-$query->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);
-
-$query->execute();
+	$sql = "UPDATE ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." SET CMND_Code=:CMND_Code, name=:name, birthday=:birthday, sex=:sex, hometown=:hometown, origin=:origin, place=:place, ethnic=:ethnic, religious=:religious, date_of_issue=:date_of_issue, where_licensing=:where_licensing, characteristics=:characteristics WHERE CMND_Code = '".$cmnd_code."'";
+	
+	$query = $db->prepare($sql);
+	//$row = $query->fetch();
+	
+	$query->bindParam(':CMND_Code', $data['CMND_Code'], PDO::PARAM_STR, 255);
+	$query->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
+	$query->bindParam(':birthday', $data['birthday'], PDO::PARAM_STR);
+	$query->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
+	$query->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
+	$query->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
+	$query->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
+	$query->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
+	$query->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
+	$query->bindParam(':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR);
+	$query->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
+	$query->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);
+	
+	$query->execute();
 }
 catch(PDOException $e)
 {
-print_r($e);
-die();
+	print_r($e);
+	die();
 }
-//}
+	//Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=CMND' );
+	//die( );
 
+
+
+
+	
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
