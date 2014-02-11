@@ -9,7 +9,7 @@ if( ! defined( 'NV_IS_FILE_ADMIN' ) )
 //{
 	//get cmnd_code from delete_CMND.tpl and delete this row 
 	$cmnd_code = $nv_Request->get_title('CMND_Code','get');
-	$sql_delcmnd = "delete from".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." where CMND_Code = '".$cmnd_code."'";
+	$sql_delcmnd = "delete from ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." where CMND_Code = '".$cmnd_code."'";
 	//var_dump($sql_delcmnd);
 	//die();
 	$db->query($sql_delcmnd);
