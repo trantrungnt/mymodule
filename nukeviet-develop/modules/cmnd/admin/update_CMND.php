@@ -82,6 +82,7 @@ AND !empty($data['place']) AND !empty($data['ethnic'])
 AND !empty($data['religious']) AND !empty($data['date_of_issue'])
 AND !empty($data['where_licensing']) AND !empty($data['characteristics']))*/
 
+
 if (isset($data['CMND_Code']) != "") 
 //execute to update CMND
 try{

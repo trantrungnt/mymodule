@@ -1,5 +1,5 @@
 <!-- BEGIN: main -->
-	<form action="{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post">
+	<form action="{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" enctype="multipart/form-data">
 		<div style="text-align: center"><input name="submit" type="submit" value="Thêm mới" /></div>
 		
 		<table width="500">
@@ -16,6 +16,11 @@
 			<tr>
 				<td> Ngày sinh</td>
 				<td> <input type="text" name="birthday"/></td>
+			</tr>
+			
+			<tr>
+				<td> Ảnh đại diện</td>
+				<td> <input type="file" name="avatar"></td>
 			</tr>
 			
 			<tr>

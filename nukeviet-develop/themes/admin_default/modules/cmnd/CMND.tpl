@@ -4,7 +4,9 @@
 				<td> CMND </td>				
 				<td> Họ và tên </td>				
 				<td> Ngày sinh</td>			
-				<td> Giới tính </td>				
+				<td> Giới tính </td>	
+				<td> Ảnh</td>
+				<td> Ảnh cỡ nhỏ</td>			
 				<td> Quê quán </td>				
 				<td> Nguyên quán</td>			
 				<td> Nơi ĐKHKTT</td>			
@@ -22,7 +24,9 @@
 				<td>{DATA.cmnd_code}</td>			
 				<td>{DATA.name}</td>				
 				<td>{DATA.birthday}</td>				
-				<td>{DATA.sex}</td>				
+				<td>{DATA.sex}</td>		
+				<td> <img src="{DATA.image}" width="120" alt="Ảnh"/> </td> 
+				<td> <img src="{DATA.thumb}" width="120" alt="Ảnh cỡ nhỏ"/> </td>		
 				<td>{DATA.hometown}</td>			
 				<td>{DATA.origin} </td>			
 				<td>{DATA.place}</td>			
