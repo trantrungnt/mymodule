@@ -11,6 +11,8 @@
 //Authentication for main.php
 if( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
+$chkUpdate = ''; 
+
 //get cmnd_code from main.tpl because data is filled to main.tpl 
 $cmnd = $nv_Request->get_title('cmnd_code','get');
 $sql_cmnd = "SELECT cmnd FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." WHERE cmnd=:cmnd";
@@ -22,8 +24,59 @@ $rows = $smt->fetch();
 if  (isset($rows['cmnd'])) //check cmnd_code in database
 {
 	//update data by cmnd
-	var_dump($cmnd);
-	die();
+	$sql = "SELECT  cmnd, 
+					name, 
+					birthday, 
+					sex, 
+					thumb, 
+					hometown, 
+					origin, 
+					place, 
+					ethnic, 
+					religious, 
+					date_of_issue, 
+					where_licensing, 
+					characteristics
+	FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." WHERE cmnd=:cmnd";
+	$smt = $db->prepare($sql);
+	$smt->bindParam( ':cmnd', $cmnd );
+	$smt->execute();			
+	$rows = $smt->fetch();
+	
+	
+	
+	//@require_once ( NV_ROOTDIR . "/includes/class/image.class.php" );
+	$xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file );
+	$xtpl->assign('DATA', array(
+								"cmnd" => $rows['cmnd'],
+								"name" => $rows['name'],
+								"birthday" => $rows['birthday'],
+								"sex" => $rows['sex'],
+							    "thumb" =>  NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $rows['thumb'],
+								"hometown" => $rows['hometown'],
+								"origin" => $rows['origin'],
+								"place" => $rows['place'],
+								"ethnic" => $rows['ethnic'],
+								"religious" => $rows['religious'],
+								"date_of_issue" => $rows['date_of_issue'],
+								"where_licensing" => $rows['where_licensing'],
+								"characteristics" => $rows['characteristics'])
+								);
+			
+	if ($rows['sex'] ==1)
+	{
+		$ck_gender = 'checked=checked';
+		$xtpl->assign( 'checkmale', $ck_gender );
+	}
+	else 
+	{
+		$ck_gender = 'checked=checked';
+		$xtpl->assign( 'checkfemale', $ck_gender );
+	}
+	
+	$xtpl->parse('main.loop');	
+	$chkUpdate = 'Sửa thông tin';	
+	$xtpl->assign('chkUpdate',$chkUpdate);
 }
 else 
 {
@@ -240,7 +293,9 @@ if ($data['sex'] ==1)
 		$ck_gender = 'checked=checked';
 		$xtpl->assign( 'checkfemale', $ck_gender );
 	}
-	
+
+$chkUpdate = 'Thêm mới';
+$xtpl->assign('chkUpdate', $chkUpdate);	
 	
 }
 

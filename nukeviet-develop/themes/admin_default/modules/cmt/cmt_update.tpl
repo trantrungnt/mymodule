@@ -26,7 +26,7 @@
 
 		<tr>
 			<td> Ảnh đại diện</td>
-			<td><input type="file" name="avatar"><span style="color: red">{error_avatar}</span></td>
+			<td><input type="text" name="browse" value="{DATA.thumb}"/>  <input type="file" name="avatar" /><span style="color: red">{error_avatar}</span></td>
 		</tr>
 
 		<tr>
@@ -77,7 +77,7 @@
 			<td><input type="text" name="characteristics" value="{DATA.characteristics}" /> <span style="color: red">{error_characteristics}</span> </td>
 		</tr>
 	</table>
-	<div style="text-align: center"><input name="submit" type="submit" value="Thêm mới" />
+	<div style="text-align: center"><input name="submit" type="submit" value="{chkUpdate}" />
 	</div>
 
 </form>
