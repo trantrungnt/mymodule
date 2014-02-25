@@ -8,7 +8,7 @@
 
 <form action="{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" enctype="multipart/form-data">
 
-	<table align="center" width="500">
+	<table align="center" width="600">
 		<tr>
 			<td> Mã Chứng minh thư nhân dân</td>
 			<td><input type="text" name="cmnd" value="{DATA.cmnd}"/> <span style="color: red">{error_cmnd}</span></td> 
