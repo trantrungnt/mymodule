@@ -46,8 +46,7 @@ $xtpl->assign( 'NV_NAME_VARIABLE', NV_NAME_VARIABLE );
 $xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );
 $xtpl->assign( 'MODULE_NAME', $module_name );
 $xtpl->assign( 'OP', $op );
-
-
+$xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL ); ///mymodule/nukeviet-develop/
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );

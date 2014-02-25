@@ -16,8 +16,8 @@ $lang_translator['copyright'] = '@Copyright (C) 2014 VINADES.,JSC. All rights re
 $lang_translator['info'] = '';
 $lang_translator['langtype'] = 'lang_module';
 
-$lang_module['main'] = "Main";
-$lang_module['detail'] = "Detail";
+$lang_module['main'] = "list Identity Card";
+//$lang_module['detail'] = "Detail";
 $lang_module['search'] = "Search";
 $lang_module['CMND'] = "Identity Card";
 

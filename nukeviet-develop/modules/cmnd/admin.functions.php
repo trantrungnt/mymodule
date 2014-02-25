@@ -10,11 +10,14 @@
 
 if ( ! defined( 'NV_ADMIN' ) or ! defined( 'NV_MAINFILE' ) or ! defined( 'NV_IS_MODADMIN' ) ) die( 'Stop!!!' );
 
-$submenu['main'] = $lang_module['main'];
-$submenu['config'] = $lang_module['config'];
-$submenu['CMND'] = $lang_module['CMND'];
 
-$allow_func = array( 'main', 'config', 'CMND', 'delete_CMND', 'update_CMND');
+$submenu['main'] = 'Danh sách Chứng minh nhân dân' ;
+$submenu['CMND'] = 'Chứng minh nhân dân';
+
+//$submenu['config'] = $lang_module['config'];
+
+
+$allow_func = array('CMND' , 'main', 'config', 'update_CMND', 'delete_CMND');
 
 define( 'NV_IS_FILE_ADMIN', true );
 

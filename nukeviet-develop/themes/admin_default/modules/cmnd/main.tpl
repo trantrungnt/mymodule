@@ -1,76 +1,44 @@
 <!-- BEGIN: main -->
-	<form action="{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" enctype="multipart/form-data">
-		<div style="text-align: center"><input name="submit" type="submit" value="Thêm mới" /></div>
-		
-		<table width="500">
+		<table class="tab1">
 			<tr>
-				<td> Mã Chứng minh thư nhân dân</td>
-				<td> <input type="text" name="CMND"/> </td>				
-			</tr> 
-			
-			<tr>
-				<td> Họ và tên</td>
-				<td> <input type="text" name="name"/></td>
-			</tr>
-			
-			<tr>
+				<td> CMND </td> 
+				<td> Họ và tên </td>
 				<td> Ngày sinh</td>
-				<td> <input type="text" name="birthday"/></td>
-			</tr>
-			
-			<tr>
-				<td> Ảnh đại diện</td>
-				<td> <input type="file" name="avatar"></td>
-			</tr>
-			
-			<tr>
-				<td> Giới tính</td>
-				
-				<td> 	
-					<input type="radio" name="sex" value="1" checked="true">Nam<br/>
-	 		 		<input type="radio" name="sex" value="0">Nữ
-	 		 	</td>
-			</tr>
-			
-			<tr>
+				<td> Giới tính </td>
+				<td> Ảnh</td>
+				<td> Ảnh cỡ nhỏ</td>
 				<td> Quê quán </td>
-				<td> <input type="text" name="hometown" /></td>
-			</tr>
-			
-			<tr>
 				<td> Nguyên quán</td>
-				<td> <input type="text" name="origin"/></td>
-			</tr>
-			
-			<tr>
-				<td> Nơi đăng ký hộ khẩu thường trú</td>
-				<td> <input type="text" name="place" /></td>
-			</tr>
-			
-			<tr>
+				<td> Nơi ĐKHKTT</td>
 				<td> Dân tộc</td>
-				<td> <input type="text" name="ethnic" /></td>
-			</tr>
-			
-			<tr>
 				<td> Tôn giáo</td>
-				<td> <input type="text" name="religious" /> </td>
-			</tr>
-			
-			<tr>
 				<td> Ngày cấp</td>
-				<td><input type="text" name="date_of_issue" /></td>
-			</tr>
-			
-			<tr>
 				<td> Nơi cấp</td>
-				<td> <input type="text" name="where_licensing" /></td>
+				<td> Đặc điểm </td>
+
+				<td></td>
 			</tr>
-			
+
+			<!-- BEGIN: loop -->
 			<tr>
-				<td> Đặc điểm</td>
-				<td> <input type="text" name="characteristics" /></td>
+				<td> {DATA.cmnd} </td>
+				<td>{DATA.name}</td>
+				<td>{DATA.birthday}</td>
+				<td>{DATA.sex}</td>
+				<td> <img src="{DATA.image}" width="120" alt="Ảnh"/> </td>
+				<td> <img src="{DATA.thumb}" width="120" alt="Ảnh cỡ nhỏ"/> </td>
+				<td>{DATA.hometown}</td>
+				<td>{DATA.origin} </td>
+				<td>{DATA.place}</td>
+				<td>{DATA.ethnic}</td>
+				<td>{DATA.religious}</td>
+				<td>{DATA.date_of_issue}</td>
+				<td>{DATA.where_licensing}</td>
+				<td>{DATA.characteristics}</td>
+				<td> <a href="index.php?language=vi&nv=cmnd&op=update_CMND&cmnd={DATA.cmnd}">Sửa</a></td>
+				<td> <a href="index.php?language=vi&nv=cmnd&op=delete_CMND&cmnd={DATA.cmnd}">Xóa</a></td>
 			</tr>
+			<!-- END: loop -->
 		</table>
-	</form>
 <!-- END: main -->
+

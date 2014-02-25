@@ -93,3 +93,4 @@ function ver_menu_click() {
 		$('#cs_menu i').removeClass("icon-circle-arrow-right").addClass("icon-circle-arrow-left");
 	}
 }
+

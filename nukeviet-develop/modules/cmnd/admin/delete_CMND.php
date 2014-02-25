@@ -4,14 +4,14 @@
 if( ! defined( 'NV_IS_FILE_ADMIN' ) )
 	die( 'Stop!!!' );
 
-//get cmnd_code from delete_CMND.tpl and delete this row 
-$cmnd_code = $nv_Request->get_title('CMND_Code','get');
+//get cmnd from delete_CMND.tpl and delete this row
+$cmnd = $nv_Request->get_title('cmnd','get');
 
-$sqldel_cmnd_code = "SELECT CMND_code , name , birthday , sex , image, thumb, hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics 
-FROM ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." WHERE CMND_Code='".$cmnd_code."'";
+$sqldel_cmnd = "SELECT cmnd , name , birthday , sex , image, thumb, hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics
+FROM ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." WHERE cmnd='".$cmnd."'";
 
-$_querydel_cmnd_code = $db->query($sqldel_cmnd_code);
-$row = $_querydel_cmnd_code->fetch();
+$_querydel_cmnd = $db->query($sqldel_cmnd);
+$row = $_querydel_cmnd->fetch();
 
 
 if( $row['image'] != '' && file_exists( NV_UPLOADS_REAL_DIR . "/" . $row['image'] ) )
@@ -24,17 +24,17 @@ if( $row['image'] != '' && file_exists( NV_UPLOADS_REAL_DIR . "/" . $row['image'
 				{
 					@unlink( NV_UPLOADS_REAL_DIR . "/" . $row['thumb'] );
 				}
-				
-				//xoa du lieu trong DB		
-				$sql_delcmnd = "delete from ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." where CMND_Code = '".$cmnd_code."'";
+
+				//xoa du lieu trong DB
+				$sql_delcmnd = "delete from ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." where cmnd = '".$cmnd."'";
 				$db->query($sql_delcmnd);
 				}
 			}
-	
 
-//if (!empty($delcmnd_code))
+
+//if (!empty($delcmnd))
 //{
-	
+
 	//$db->exec();
 //}
 
@@ -51,15 +51,15 @@ $xtpl->assign( 'OP', $op );
 
 
 //Display cmnd list again
-$sql_cmnd = "SELECT CMND_code , name , birthday , sex , image, thumb, hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics FROM ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;
-$_query = $db->query($sql_cmnd); 
+$sql_cmnd = "SELECT cmnd , name , birthday , sex , image, thumb, hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics FROM ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;
+$_query = $db->query($sql_cmnd);
 
 @require_once ( NV_ROOTDIR . "/includes/class/image.class.php" );
 
 while($row = $_query->fetch())
-{	
+{
 		$xtpl->assign('DATA', array(
-		"cmnd_code" => $row['cmnd_code'],
+		"cmnd" => $row['cmnd'],
 		"name" => $row['name'],
 		"birthday" => $row['birthday'],
 		"sex" => $row['sex'],
@@ -74,8 +74,8 @@ while($row = $_query->fetch())
 		"where_licensing" => $row['where_licensing'],
 		"characteristics" => $row['characteristics']
 		));
-	
-	
+
+
 	$xtpl->parse('main.loop');
 }
 

@@ -16,9 +16,9 @@ $lang_translator['copyright'] = '@Copyright (C) 2014 VINADES.,JSC. All rights re
 $lang_translator['info'] = '';
 $lang_translator['langtype'] = 'lang_module';
 
-$lang_module['main'] = 'Trang chính';
-$lang_module['config'] = 'Cấu hình';
-$lang_module['CMND'] = 'Chứng minh thư nhân dân';
-$lang_module['save'] = 'Save';
+$lang_module['main'] = 'Chứng minh nhân dân';
+//$lang_module['config'] = 'Cấu hình';
+$lang_module['CMND'] = 'Danh sách Chứng minh nhân dân';
+//$lang_module['save'] = 'Save';
 
 ?>

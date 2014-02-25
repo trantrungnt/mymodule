@@ -322,7 +322,7 @@ else
 				elseif( $row['field_type'] == 'date' )
 				{
 					$row['value'] = ( empty( $row['value'] ) ) ? '' : date( 'd/m/Y', $row['value'] );
-					$xtpl->assign( 'FIELD', $row );
+					$xtpl->assign( 'FIELD', $row );	
 					$xtpl->parse( 'main.edit_user.field.loop.date' );
 				}
 				elseif( $row['field_type'] == 'textarea' )
