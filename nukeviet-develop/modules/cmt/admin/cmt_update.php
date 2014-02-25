@@ -86,10 +86,7 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	{
 		//upload file avatar
 		if( isset( $_FILES['avatar'] ) and is_uploaded_file( $_FILES['avatar']['tmp_name'] ) )
-		{
-			var_dump('ok');
-			die();
-			
+		{			
 			@require_once (NV_ROOTDIR . "/includes/class/upload.class.php");
 
 			$upload = new upload( array( 'images' ), $global_config['forbid_extensions'], $global_config['forbid_mimes'], NV_UPLOAD_MAX_FILESIZE, NV_MAX_WIDTH, NV_MAX_HEIGHT );

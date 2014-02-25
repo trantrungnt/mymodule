@@ -64,7 +64,7 @@
 
 		<tr>
 			<td> Ngày cấp</td>
-			<td><input type="text" name="date_of_issue"  value="{DATA.date_of_issue}"/> <span style="color: red">{error_date_of_issue}</span></td>
+			<td><input type="text" name="date_of_issue" id="date_of_issue"  value="{DATA.date_of_issue}"/> <span style="color: red">{error_date_of_issue}</span></td>
 		</tr>
 
 		<tr>
@@ -83,7 +83,7 @@
 </form>
 
 <script type="text/javascript">
-	$("#exp_date, #birthday").datepicker({
+	$("#birthday, #date_of_issue").datepicker({
 		showOn : "both",
 		dateFormat : "dd/mm/yy",
 		changeMonth : true,
