@@ -142,7 +142,10 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 
 			$row->bindParam( ':cmnd', $data['cmnd'], PDO::PARAM_STR, 255 );
 			$row->bindParam( ':name', $data['name'], PDO::PARAM_STR, 255 );
-			$row->bindParam( ':birthday', $data['birthday'], PDO::PARAM_STR );
+			
+			$birthday = substr($data['birthday'],6,4).'-'.substr($data['birthday'],3,2).'-'.substr($data['birthday'],0,2);
+			$row->bindParam( ':birthday', $birthday, PDO::PARAM_STR );
+			
 			$row->bindParam( ':sex', $data['sex'], PDO::PARAM_INT );
 			$row->bindParam( ':image', $data['image'], PDO::PARAM_STR, 255 );
 			$row->bindParam( ':thumb', $data['thumb'], PDO::PARAM_STR, 255 );
@@ -151,7 +154,10 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 			$row->bindParam( ':place', $data['place'], PDO::PARAM_STR, 255 );
 			$row->bindParam( ':ethnic', $data['ethnic'], PDO::PARAM_STR, 255 );
 			$row->bindParam( ':religious', $data['religious'], PDO::PARAM_STR, 255 );
-			$row->bindParam( ':date_of_issue', $data['date_of_issue'], PDO::PARAM_STR );
+			
+			$date_of_issue = substr($data['date_of_issue'],6,4).'-'.substr($data['date_of_issue'],3,2).'-'.substr($data['date_of_issue'],0,2);
+			$row->bindParam( ':date_of_issue', $date_of_issue, PDO::PARAM_STR );
+			
 			$row->bindParam( ':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255 );
 			$row->bindParam( ':characteristics', $data['characteristics'], PDO::PARAM_STR, 255 );
 
