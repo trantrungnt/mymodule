@@ -21,7 +21,7 @@
 
 		<tr>
 			<td> Ngày sinh</td>
-			<td> <input name="birthday" id="birthday" style="width: 90px;" maxlength="10" type="text" readonly="readonly" /></td>	
+			<td> <input name="birthday" id="birthday" style="width: 90px;" maxlength="10" type="text" readonly="readonly" /><span style="color: red">{error_birthday}</span></td>	
 		</tr>
 
 		<tr>
@@ -32,9 +32,9 @@
 		<tr>
 			<td> Giới tính</td>
 
-			<td><input type="radio" name="sex" value="1" checked="true">Nam
+			<td><input type="radio" name="sex" value="1" {checkmale}/>Nam
 			<br/>
-			<input type="radio" name="sex" value="0">Nữ </td>
+			<input type="radio" name="sex" value="0" {checkfemale} />Nữ </td>
 		</tr>
 
 		<tr>
@@ -64,7 +64,7 @@
 
 		<tr>
 			<td> Ngày cấp</td>
-			<td><input type="text" name="date_of_issue" /> Nhập theo dạng yyyy-mm-dd <span style="color: red">{error_date_of_issue}</span></td>
+			<td><input type="text" name="date_of_issue" /> <span style="color: red">{error_date_of_issue}</span></td>
 		</tr>
 
 		<tr>

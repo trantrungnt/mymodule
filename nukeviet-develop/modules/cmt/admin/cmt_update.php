@@ -27,6 +27,7 @@ $error_religious = '';
 $error_date_of_issue = '';
 $error_where_licensing = '';
 $error_characteristics = '';
+$ck_gender = '';
 
 // Kiểm tra dữ liệu khi submit
 if( $nv_Request->isset_request( 'submit', 'post' ) )
@@ -43,7 +44,9 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	$data['date_of_issue'] = $nv_Request->get_title( 'date_of_issue', 'post', '' );
 	$data['where_licensing'] = $nv_Request->get_title( 'where_licensing', 'post', '' );
 	$data['characteristics'] = $nv_Request->get_title( 'characteristics', 'post', '' );
-	$data['thumb'] = 'aaa';
+	
+	
+	
 	if( empty( $data['cmnd'] ) )
 	{
 		$error_cmnd = 'Bạn chưa nhập cmnd';
@@ -51,6 +54,33 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 	elseif( empty( $data['name'] ) )
 	{
 		$error_name = 'Bạn chưa nhập name';
+	}
+	elseif (empty($data['birthday'])) {
+		$error_birthday = 'Bạn chưa nhập ngày sinh';
+	}
+	elseif ( empty($data['hometown'])) {
+		$error_hometown = 'Bạn chưa nhập quê quán';
+	}
+	elseif (empty($data['origin'])) {
+		$error_origin = 'Bạn chưa nhập nguyên quán';
+	}
+	elseif (empty($data['place'] )) {
+		$error_place = 'Bạn chưa nhập Nơi đăng ký hộ khẩu thường trú';
+	}
+	elseif (empty($data['ethnic'])) {
+		$error_ethnic = 'Bạn chưa nhập Dân tộc';
+	}
+	elseif (empty($data['religious'])) {
+		$error_religious = 'Bạn chưa nhập Tôn giáo';
+	}
+	elseif (empty($data['date_of_issue'])) {
+		$error_date_of_issue = 'Bạn chưa nhập Ngày cấp';
+	}
+	elseif (empty($data['where_licensing'])) {
+		$error_where_licensing = 'Bạn chưa nhập Nơi cấp';
+	}
+	elseif (empty($data['characteristics'])) {
+		$error_characteristics = 'Bạn chưa nhập đặc điểm';
 	}
 	else
 	{
@@ -176,6 +206,18 @@ $xtpl->assign( 'NV_BASE_SITEURL', NV_BASE_SITEURL ); ///mymodule/nukeviet-develo
 $xtpl->assign( 'NV_LANG_INTERFACE', NV_LANG_INTERFACE ); //vi
 
 $xtpl->assign( 'DATA', $data );
+
+if ($data['sex'] ==1)
+	{
+		$ck_gender = 'checked=checked';
+		$xtpl->assign( 'checkmale', $ck_gender );
+	}
+	else 
+	{
+		$ck_gender = 'checked=checked';
+		$xtpl->assign( 'checkfemale', $ck_gender );
+	}
+	
 
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
