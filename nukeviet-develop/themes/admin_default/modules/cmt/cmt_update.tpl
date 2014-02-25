@@ -39,27 +39,27 @@
 
 		<tr>
 			<td> Quê quán </td>
-			<td><input type="text" name="hometown" /> <span style="color: red">{error_hometown}</span></td>
+			<td><input type="text" name="hometown" value="{DATA.hometown}"/> <span style="color: red">{error_hometown}</span></td>
 		</tr>
 
 		<tr>
 			<td> Nguyên quán</td>
-			<td><input type="text" name="origin"/><span style="color: red">{error_origin}</span></td>
+			<td><input type="text" name="origin" value="{DATA.origin}"/><span style="color: red">{error_origin}</span></td>
 		</tr>
 
 		<tr>
 			<td> Nơi đăng ký hộ khẩu thường trú</td>
-			<td><input type="text" name="place" /><span style="color: red">{error_place}</span></td>
+			<td><input type="text" name="place" value="{DATA.place}"/><span style="color: red">{error_place}</span></td>
 		</tr>
 
 		<tr>
 			<td> Dân tộc</td>
-			<td><input type="text" name="ethnic" /><span style="color: red">{error_ethnic}</span></td>
+			<td><input type="text" name="ethnic" value="{DATA.ethnic}"/><span style="color: red">{error_ethnic}</span></td>
 		</tr>
 
 		<tr>
 			<td> Tôn giáo</td>
-			<td><input type="text" name="religious" /> <span style="color: red">{error_religious}</span></td>
+			<td><input type="text" name="religious" value="{DATA.religious}" /> <span style="color: red">{error_religious}</span></td>
 		</tr>
 
 		<tr>
@@ -69,12 +69,12 @@
 
 		<tr>
 			<td> Nơi cấp</td>
-			<td><input type="text" name="where_licensing" /> <span style="color: red">{error_where_licensing}</span> </td>
+			<td><input type="text" name="where_licensing" value="{DATA.where_licensing}" /> <span style="color: red">{error_where_licensing}</span> </td>
 		</tr>
 
 		<tr>
 			<td> Đặc điểm</td>
-			<td><input type="text" name="characteristics" /> <span style="color: red">{error_characteristics}</span> </td>
+			<td><input type="text" name="characteristics" value="{DATA.characteristics}" /> <span style="color: red">{error_characteristics}</span> </td>
 		</tr>
 	</table>
 	<div style="text-align: center"><input name="submit" type="submit" value="Thêm mới" />
