@@ -130,9 +130,9 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 		}
 
 		try
-		{
+		{			
 			$sql = "INSERT INTO " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data . " (cmnd, name, birthday, sex, image, thumb, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:cmnd, :name, :birthday, :sex, :image, :thumb, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)";
-			$imgthumb = 'abc';
+			
 			$row = $db->prepare( $sql );
 			$data['image'] = $module_data . "/images/" . $basename_file;
 			$data['thumb'] = $imgthumb;
@@ -162,7 +162,7 @@ if( $nv_Request->isset_request( 'submit', 'post' ) )
 			$rowCount = $row->rowCount( );
 			if( $rowCount )
 			{
-				Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=CMND' );
+				Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=main' );
 				die();
 			}
 
