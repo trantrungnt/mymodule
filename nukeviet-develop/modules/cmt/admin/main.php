@@ -24,8 +24,7 @@ $xtpl->assign( 'OP', $op );
 $sql = "SELECT cmnd , name , birthday , sex, image, thumb , hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;
 $query = $db->query( $sql );
 $row = $query->fetch( );
- //var_dump($row);
- //die();
+ 
 
 if ($row['cmnd'] != "") 
 {
