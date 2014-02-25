@@ -8,7 +8,7 @@
 
 <form action="{NV_BASE_ADMINURL}index.php?{NV_LANG_VARIABLE}={NV_LANG_DATA}&amp;{NV_NAME_VARIABLE}={MODULE_NAME}&amp;{NV_OP_VARIABLE}={OP}" method="post" enctype="multipart/form-data">
 
-	<table width="500">
+	<table align="center" width="500">
 		<tr>
 			<td> Mã Chứng minh thư nhân dân</td>
 			<td><input type="text" name="cmnd" value="{DATA.cmnd}"/> <span style="color: red">{error_cmnd}</span></td> 
@@ -26,7 +26,8 @@
 
 		<tr>
 			<td> Ảnh đại diện</td>
-			<td><input type="text" name="browse" value="{DATA.thumb}"/>  <input type="file" name="avatar" /><span style="color: red">{error_avatar}</span></td>
+			<td> {avatar}
+				<input type="file" name="avatar" /><span style="color: red">{error_avatar}</span></td>
 		</tr>
 
 		<tr>
@@ -75,8 +76,9 @@
 		<tr>
 			<td> Đặc điểm</td>
 			<td><input type="text" name="characteristics" value="{DATA.characteristics}" /> <span style="color: red">{error_characteristics}</span> </td>
-		</tr>
+		</tr>	
 	</table>
+		<br/>
 	<div style="text-align: center"><input name="submit" type="submit" value="{chkUpdate}" />
 	</div>
 

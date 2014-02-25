@@ -12,6 +12,7 @@
 if( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
 $chkUpdate = ''; 
+$avatar = '';
 
 //get cmnd_code from main.tpl because data is filled to main.tpl 
 $cmnd = $nv_Request->get_title('cmnd_code','get');
@@ -75,8 +76,14 @@ if  (isset($rows['cmnd'])) //check cmnd_code in database
 	}
 	
 	$xtpl->parse('main.loop');	
+	
+	//change value button 
 	$chkUpdate = 'Sửa thông tin';	
 	$xtpl->assign('chkUpdate',$chkUpdate);
+	
+	//Display Image in Form update 
+	$avatar = '<img src=" '.NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $rows['thumb'].' " alt="Ảnh Chứng minh thư nhân dân"/>';
+	$xtpl->assign('avatar',$avatar);	
 }
 else 
 {
