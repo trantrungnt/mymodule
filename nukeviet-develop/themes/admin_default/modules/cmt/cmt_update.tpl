@@ -21,7 +21,7 @@
 
 		<tr>
 			<td> Ngày sinh</td>
-			<td> <input name="birthday" id="birthday" value="{DATA.birthday}" style="width: 90px;" maxlength="10" type="text" readonly="readonly" /><span style="color: red">{error_birthday}</span></td>	
+			<td> <input name="birthday" id="birthday" value="{DATA.birthday}" style="width: 90px;" maxlength="10" type="text" readonly="readonly"/><span style="color: red">{error_birthday}</span></td>	
 		</tr>
 
 		<tr>
@@ -65,7 +65,7 @@
 
 		<tr>
 			<td> Ngày cấp</td>
-			<td><input type="text" name="date_of_issue" id="date_of_issue"  value="{DATA.date_of_issue}"/> <span style="color: red">{error_date_of_issue}</span></td>
+			<td><input type="text" name="date_of_issue" id="date_of_issue"  value="{DATA.date_of_issue}" style="width: 90px;" maxlength="10" type="text" readonly="readonly"/> <span style="color: red">{error_date_of_issue}</span></td>
 		</tr>
 
 		<tr>
