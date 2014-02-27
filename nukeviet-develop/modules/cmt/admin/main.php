@@ -8,7 +8,8 @@
  * @Createdate Wed, 19 Feb 2014 15:19:31 GMT
  */
 
-if ( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
+if ( ! defined( 'NV_IS_FILE_ADMIN' ) )
+										 die( 'Stop!!!' );
 
 $xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file );
 $xtpl->assign( 'LANG', $lang_module );
@@ -20,42 +21,62 @@ $xtpl->assign( 'NV_OP_VARIABLE', NV_OP_VARIABLE );
 $xtpl->assign( 'MODULE_NAME', $module_name );
 $xtpl->assign( 'OP', $op );
 
+ $sql = "SELECT cmnd, 
+				name, 
+				birthday, 
+				sex, 
+				image, 
+				thumb , 
+				hometown, 
+				origin, 
+				place, 
+				ethnic, 
+				religious,
+				date_of_issue, 
+				where_licensing, 
+				characteristics 
+		FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;;
+$query = $db->query($sql);
 
-$sql = "SELECT cmnd , name , birthday , sex, image, thumb , hometown , origin , place , ethnic , religious , date_of_issue , where_licensing , characteristics FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;
-$query = $db->query( $sql );
-$row = $query->fetch( );
- 
+// count row in table cmnd in database 
+$sql_count = "SELECT COUNT(*) FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data;;
+$qr = $db->query( $sql_count );
+$count = $qr->fetch();
 
-if ($row['cmnd'] != "") 
+if ($count > 0) 
 {
-	
-			@require_once (NV_ROOTDIR . "/includes/class/image.class.php");
-			$xtpl->assign( 'DATA', array(
-			"cmnd" => $row['cmnd'],
-			"name" => $row['name'],
-			"birthday" => $row['birthday'],
-			"sex" => $row['sex'],
-			"image" => NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $row['image'],
-			"thumb" => NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $row['thumb'],
-			"hometown" => $row['hometown'],
-			"origin" => $row['origin'],
-			"place" => $row['place'],
-			"ethnic" => $row['ethnic'],
-			"religious" => $row['religious'],
-			"date_of_issue" => $row['date_of_issue'],
-			"where_licensing" => $row['where_licensing'],
-			"characteristics" => $row['characteristics']) );
-		
-			$xtpl->parse('main.loop');
-	
+	while($row = $query->fetch())
+			{
+				$xtpl->assign( 'DATA', array(
+				"cmnd" => $row['cmnd'],
+				"name" => $row['name'],
+				"birthday" => $row['birthday'],
+				"sex" => $row['sex'],
+				"image" => NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $row['image'],
+				"thumb" => NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $row['thumb'],
+				"hometown" => $row['hometown'],
+				"origin" => $row['origin'],
+				"place" => $row['place'],
+				"ethnic" => $row['ethnic'],
+				"religious" => $row['religious'],
+				"date_of_issue" => $row['date_of_issue'],
+				"where_licensing" => $row['where_licensing'],
+				"characteristics" => $row['characteristics']) );
+			    $xtpl->parse('main.loop');			
+			}
 }
 else 
 {
-		Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=CMND' );
-		die( );
-	
+	Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=cmt_update' );
+	die( );
 }
+ 
 
+	
+
+
+		
+	
 $xtpl->parse( 'main' );
 $contents = $xtpl->text( 'main' );
 

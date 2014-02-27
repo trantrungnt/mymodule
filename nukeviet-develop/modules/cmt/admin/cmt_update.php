@@ -11,24 +11,33 @@
 //Authentication for main.php
 if( ! defined( 'NV_IS_FILE_ADMIN' ) ) die( 'Stop!!!' );
 
+
+
 $chkUpdate = ''; 
 $avatar = '';
+$imgthumb = '';
+
 
 //get cmnd_code from main.tpl because data is filled to main.tpl 
 $cmnd = $nv_Request->get_title('cmnd_code','get');
+
 $sql_cmnd = "SELECT cmnd FROM " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." WHERE cmnd=:cmnd";
 $smt = $db->prepare($sql_cmnd);
 $smt->bindParam( ':cmnd', $cmnd );
 $smt->execute();			
 $rows = $smt->fetch();
 
+
 if  (isset($rows['cmnd'])) //check cmnd_code in database
 {
+	
+	
 	//update data by cmnd
 	$sql = "SELECT  cmnd, 
 					name, 
 					birthday, 
 					sex, 
+					image,
 					thumb, 
 					hometown, 
 					origin, 
@@ -43,15 +52,150 @@ if  (isset($rows['cmnd'])) //check cmnd_code in database
 	$smt->bindParam( ':cmnd', $cmnd );
 	$smt->execute();			
 	$rows = $smt->fetch();
+
+	//var_dump('ok');
+		//die();
+				
+	//delete file image on server and upload image file again 
+	if( isset( $_FILES['avatar'] ) and is_uploaded_file( $_FILES['avatar']['tmp_name'] ) )
+			{
+				@require_once NV_ROOTDIR . '/includes/class/upload.class.php' ;
+
+				$upload = new upload( array( 'images' ), $global_config['forbid_extensions'], $global_config['forbid_mimes'], NV_UPLOAD_MAX_FILESIZE, NV_MAX_WIDTH, NV_MAX_HEIGHT );
+				$upload_info = $upload->save_file( $_FILES['avatar'], NV_ROOTDIR . '/' . SYSTEM_UPLOADS_DIR . '/' . $module_name. "/images", false );
+
+				@unlink( $_FILES['avatar']['tmp_name'] );
+				if( empty( $upload_info['error'] ) )
+				{
+					require_once NV_ROOTDIR . '/includes/class/image.class.php' ;
+			
+					$_image = new image( $upload_info['name'], NV_MAX_WIDTH, NV_MAX_HEIGHT );
+										
+					$height = 150;
+					$width = 150;
+					
+					$_image->resizeXY( $width, $height );
+					$basename = preg_replace( '/(.*)(\.[a-zA-Z]+)$/', '\1-' . $width . '-' . $height . '\2', $upload_info['name'], FALSE );	
+					$_image->save( $_FILES['avatar'], NV_UPLOADS_REAL_DIR . '/' . $module_name . "/thumb", $basename);
+					
+					
+					//Change Permision
+					@chmod( $upload_info['name'], 0644 );
+					
+					//delete old image
+					$file_image = NV_ROOTDIR.'/uploads/'.$rows['image'];
+		
+					if( ! empty( $rows['image']  ) and is_file( $file_image ))
+					{
+						@nv_deletefile( $file_image );
+					}
+					
+					//delete old thumb
+					$file_thumb = NV_ROOTDIR.'/uploads/'.$rows['thumb'];
+					
+					if( ! empty( $rows['thumb']  ) and is_file( $file_thumb ))
+					{
+						@nv_deletefile( $file_thumb );
+					}
+
+					if( file_exists( NV_UPLOADS_REAL_DIR . '/' . $module_name . '/thumb/' . $basename ) )
+					{
+							$imgthumb = NV_UPLOADS_REAL_DIR . '/' . $module_name . '/thumb/' . $basename;
+		
+							$imgthumb = str_replace( NV_ROOTDIR . "/" . NV_UPLOADS_DIR . "/", "", $imgthumb );
+		
+					}		
+					
+					//Update Image and Thumb in Table cmnd 
+					$sql_upd_img = "UPDATE " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." 
+									SET image=:image,
+										thumb=:thumb, 					
+									WHERE cmnd=:cmnd";
+									
+					$smt = $db->prepare($sql_upd_img);
+					$smt->bindParam( ':image', image );
+					$smt->bindParam( ':thumb', $thumb );
+					$smt->bindParam( ':cmnd', $cmnd );
+					$smt->execute();			
+				}
+			}
 	
 	
+	//check sumbit data 
+	if( $nv_Request->isset_request( 'submit', 'post' ) )
+	{
+								
+							
+								//update data	
+								try{
+									    $sql = "UPDATE ".$db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data." 
+												SET  cmnd=:cmnd, 
+													 name=:name, 
+													 birthday=:birthday, 
+													 sex=:sex, 
+													 image=:image, 
+													 thumb=:thumb, 
+												     hometown=:hometown, 
+													 origin=:origin, 
+													 place=:place, 
+													 ethnic=:ethnic, 
+													 religious=:religious, 
+													 date_of_issue=:date_of_issue, 
+													 where_licensing=:where_licensing, 
+													 characteristics=:characteristics 
+												WHERE cmnd =:cmnd'";
+										$smt = $db->prepare($sql);
+										$smt->bindParam( ':cmnd', $cmnd );
+										$smt->execute();	
+			
+										$query = $db->prepare($sql);
+										$row = $query->fetch();
+										$data['image'] = $module_data . "/images/" . $basename_file;
+										$data['thumb'] = $imgthumb;
+			
+										$row->bindParam(':cmnd', $data['cmnd'], PDO::PARAM_STR, 255);
+										$row->bindParam(':name', $data['name'], PDO::PARAM_STR, 255);
+										
+										$birthday = substr($data['birthday'],6,4).'-'.substr($data['birthday'],3,2).'-'.substr($data['birthday'],0,2);
+										$row->bindParam( ':birthday', $birthday, PDO::PARAM_STR );
+										
+										$row->bindParam(':sex', $data['sex'], PDO::PARAM_INT, 11);
+										$row->bindParam(':hometown', $data['hometown'] , PDO::PARAM_STR, 255);
+										$row->bindParam(':origin', $data['origin'], PDO::PARAM_STR, 255);
+										$row->bindParam(':place', $data['place'], PDO::PARAM_STR, 255);
+										$row->bindParam(':ethnic',$data['ethnic'], PDO::PARAM_STR, 255);
+										$row->bindParam(':religious', $data['religious'], PDO::PARAM_STR, 255);
+										
+										$date_of_issue = substr($data['date_of_issue'],6,4).'-'.substr($data['date_of_issue'],3,2).'-'.substr($data['date_of_issue'],0,2);
+										$row->bindParam( ':date_of_issue', $date_of_issue, PDO::PARAM_STR );
+										
+										$row->bindParam(':where_licensing', $data['where_licensing'], PDO::PARAM_STR, 255);
+										$row->bindParam(':characteristics', $data['characteristics'], PDO::PARAM_STR, 255);
+			
+										$row->execute();
+							}
+							catch(PDOException $e)
+							{
+								print_r($e);
+								die();
+							}
+								Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=main' );
+								die( );
+								
+	}
+}
+	
+	//format datetime: dd-mm-yyyy and display this format in cmt_update.tpl
+	$birthday = substr($rows['birthday'], 8, 2).'/'.substr($rows['birthday'], 5, 2).'/'.substr($rows['birthday'], 0, 4); 
+	$date_of_issue = substr($rows['date_of_issue'], 8, 2).'/'.substr($rows['date_of_issue'], 5, 2).'/'.substr($rows['date_of_issue'], 0, 4);
+ 
 	
 	//@require_once ( NV_ROOTDIR . "/includes/class/image.class.php" );
 	$xtpl = new XTemplate( $op . '.tpl', NV_ROOTDIR . '/themes/' . $global_config['module_theme'] . '/modules/' . $module_file );
 	$xtpl->assign('DATA', array(
 								"cmnd" => $rows['cmnd'],
 								"name" => $rows['name'],
-								"birthday" => $rows['birthday'],
+								"birthday" => $birthday,
 								"sex" => $rows['sex'],
 							    "thumb" =>  NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $rows['thumb'],
 								"hometown" => $rows['hometown'],
@@ -59,7 +203,7 @@ if  (isset($rows['cmnd'])) //check cmnd_code in database
 								"place" => $rows['place'],
 								"ethnic" => $rows['ethnic'],
 								"religious" => $rows['religious'],
-								"date_of_issue" => $rows['date_of_issue'],
+								"date_of_issue" => $date_of_issue,
 								"where_licensing" => $rows['where_licensing'],
 								"characteristics" => $rows['characteristics'])
 								);
@@ -84,8 +228,11 @@ if  (isset($rows['cmnd'])) //check cmnd_code in database
 	//Display Image in Form update 
 	$avatar = '<img src=" '.NV_BASE_SITEURL . NV_UPLOADS_DIR . "/" . $rows['thumb'].' " alt="Ảnh Chứng minh thư nhân dân"/>';
 	$xtpl->assign('avatar',$avatar);	
+	
+	
+			
 }
-else 
+else //insert data into cmnd table
 {
 	//get data from main.tpl to array
 		$data = array( );
@@ -202,18 +349,39 @@ else
 							$imgthumb = str_replace( NV_ROOTDIR . "/" . NV_UPLOADS_DIR . "/", "", $imgthumb );
 		
 						}
-		
-					}
-					else
-					{
-						//$error = $lang_module['upload_error'];
-						$error = 'upload is error';
-					}
-				}
-		
-				try
-				{			
-					$sql = "INSERT INTO " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data . " (cmnd, name, birthday, sex, image, thumb, hometown, origin, place, ethnic, religious, date_of_issue, where_licensing, characteristics) VALUES (:cmnd, :name, :birthday, :sex, :image, :thumb, :hometown, :origin, :place, :ethnic, :religious, :date_of_issue, :where_licensing, :characteristics)";
+						
+					try
+					{			
+					$sql = "INSERT INTO " . $db_config['prefix'] . "_" . NV_LANG_DATA . "_" . $module_data . " (cmnd, 
+																												name, 
+																												birthday, 
+																												sex, 
+																												image, 
+																												thumb, 
+																												hometown, 
+																												origin, 
+																												place, 
+																												ethnic, 
+																												religious, 
+																												date_of_issue, 
+																												where_licensing, 
+																												characteristics
+																												) 
+																										VALUES (:cmnd, 
+																												:name, 
+																												:birthday, 
+																												:sex,
+																												:image,
+																												:thumb,
+																											    :hometown, 
+																											    :origin, 
+																											    :place, 
+																											    :ethnic, 
+																											    :religious,
+					    																						:date_of_issue, 
+					    																						:where_licensing,
+					     																						:characteristics
+																											   )";
 					
 					$row = $db->prepare( $sql );
 					$data['image'] = $module_data . "/images/" . $basename_file;
@@ -241,12 +409,12 @@ else
 					$row->bindParam( ':characteristics', $data['characteristics'], PDO::PARAM_STR, 255 );
 		
 					$row->execute( );
-					$rowCount = $row->rowCount( );
-					if( $rowCount )
-					{
-						Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=main' );
-						die();
-					}
+					//$rowCount = $row->rowCount( );
+					//if( $rowCount )
+					//{
+						//Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=main' );
+						//die();
+					//}
 		
 					
 		
@@ -256,6 +424,17 @@ else
 					print_r( $e );
 					die( );
 				}
+		       Header( 'Location: ' . NV_BASE_ADMINURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&' . NV_NAME_VARIABLE . '=' . $module_name . '&' . NV_OP_VARIABLE . '=main' );
+		       die( );
+		
+					}
+					else
+					{
+						//$error = $lang_module['upload_error'];
+						$error = 'upload is error';
+					}
+				}
+		
 		
 			}
 }
